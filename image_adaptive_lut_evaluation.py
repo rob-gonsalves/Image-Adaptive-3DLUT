@@ -41,7 +41,7 @@ if cuda:
     criterion_pixelwise.cuda()
 
 # Load pretrained models
-LUTs = torch.load("saved_models/%s/LUTs_%d.pth" % (opt.model_dir, opt.epoch))
+LUTs = torch.load("saved_models/%s/LUTs_%d.pth" % (opt.model_dir, opt.epoch), map_location=torch.device('cpu'))
 LUT0.load_state_dict(LUTs["0"])
 LUT1.load_state_dict(LUTs["1"])
 LUT2.load_state_dict(LUTs["2"])
@@ -52,7 +52,7 @@ LUT1.eval()
 LUT2.eval()
 #LUT3.eval()
 #LUT4.eval()
-classifier.load_state_dict(torch.load("saved_models/%s/classifier_%d.pth" % (opt.model_dir, opt.epoch)))
+classifier.load_state_dict(torch.load("saved_models/%s/classifier_%d.pth" % (opt.model_dir, opt.epoch), map_location=torch.device('cpu')))
 classifier.eval()
 
 if opt.input_color_space == 'sRGB':
